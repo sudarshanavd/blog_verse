@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<h1>Blog Verse</h1>
+
+{% if user.is_authenticated %}
+    <h3> Hi {{user.username}} </h3> <br>
+    <form action="{% url 'logout' %}" method="post">
+        {%csrf_token%}
+        <button type="submit">logout</button>
+    </form> <br>
+    <a href="{% url 'password_change' %}">password change</a> <br>
+{% else %}
+    <a href="{%url 'login'%}">login</a> <br>
+
+    <a href="{%url 'signup'%}">signup</a><br>
+{% endif %}
+<a href="{% url 'all-blogs-list' %}">blogs entry</a>
+
+{% endblock content%}
