@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{%load static%}
+{%block link%}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{%endblock link%}
+{% block body %}
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="{%url 'home'%}"><h1>BlogVerse</h1></a>
+            </div>
+            <div class="nav-buttons">
+                <button onclick="window.location.href='{% url 'signup' %}'">Sign Up</button>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section id="loginSection">
+            <h2>Log In</h2>
+            <form method="post" id="loginForm">
+                {%csrf_token%}
+                <label for="id_username">Username:</label>
+                <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+                <label for="id_password">Password:</label>
+                <input type="password" name="password" autocomplete="current-password" required id="id_password">
+                <button type="submit">Log In</button>
+                <button type="button" id="forgotPasswordButton" onclick="window.location.href='/user/password_reset/'">Forgot Password</button>
+                </form>
+    </section>
+</main>
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br>
+{%endblock body%}

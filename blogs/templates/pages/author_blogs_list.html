@@ -1,0 +1,19 @@
+<h1>blogs</h1>
+<a href="{%url 'blogs-create' request.user.username%}">create</a>
+<ul>
+    {% for blog in blogs %}
+        <li>
+            <a href="{%url 'blogs-detail' request.user.username blog.pk%}" target="_blank">{{ blog.title }}</a><br>
+            {{blog.date}}
+            <a href="{% url 'blogs-edit' request.user.username blog.pk%}">edit</a> |
+            <a href="{%url 'blogs-delete' request.user.username blog.pk%}">delete</a>
+        </li>
+
+    {% empty %}
+    
+        <li>No blogs available</li>
+
+    {% endfor %}
+</ul>
+<br>
+<a href="{% url 'all-blogs-list' %}">blogs list</a>

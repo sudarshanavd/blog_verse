@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block body %}
+{% if user.is_authenticated %}
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="{%url 'home'%}"><h1>BlogVerse</h1></a>
+            </div>
+            <div class="nav-buttons">
+                <button onclick="window.location.href='{%url 'login'%}'">Log In</button>
+                <button onclick="window.location.href='{%url 'signup'%}'">Sign Up</button>
+            </div>
+        </nav>
+    </header>
+    <p><a href="{%url 'author-blogs-list' request.user.username%}">your blogs</a></p>
+
+{% endif %}
+<a href="{%url 'home'%}">home</a>
+
+<main>
+    <section id="blogContainer">
+        <ul>
+            {% for blog in blogs %}
+                <li>
+                    <h2><a href="{%url 'blogs-detail' blog.author blog.pk%}" target="_blank">{{ blog.title }}</a></h2>
+                    <h4>{{blog.date}}</h4>
+                    <h5>by {{ blog.author }}</h5>
+                </li>
+            
+            {% empty %}
+                <li>No blogs available</li>
+            {% endfor %}
+        </ul>
+    </section>
+</main>
+{%endblock body%}
